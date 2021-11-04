@@ -1,0 +1,92 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* stylelint-disable */
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}.lint,html{line-height:1}.lint,body{line-height:inherit}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+/* stylelint-enable */
+
+/* Begin site styles below */
+
+html {
+  font-family: "Lucida Grande", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+}
+
+/* Layout */
+* {
+  box-sizing: border-box;
+}
+#interface {
+  padding: 22px;
+}
+#header {
+  margin-bottom: 11px;
+}
+#header > h1 {
+  margin-bottom: 11px;
+}
+
+.preserve-access {
+  position: absolute;
+  left: -20000px;
+}
+
+/* Controls */
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  /* Box Styles */
+  display: block;
+  border: 0;
+  border-radius: 3px;
+  padding: 11px;
+}
+#call-button {
+  width: 143px; /* 6.5 typographic grid lines */
+  margin-right: 11px;
+}
+.join {
+  background-color: green;
+  color: white;
+}
+.leave {
+  background-color: #CA0;
+  color: black;
+}
+
+/* Video Elements */
+
+video {
+  background-color: #DDD;
+  display: block;
+  max-width: 100%;
+}
+#self {
+  width: 50%;
+  max-width: 320px;
+  margin-bottom: 11px;
+}
+
+/* Media Queries */
+
+@media screen and (min-width: 500px) {
+  #header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+  #header > * {
+    flex: 0 0 auto;
+  }
+  #header > h1 {
+    margin-bottom: 0;
+  }
+}

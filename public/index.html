@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WebRTC Starter Example: Multipeer Video Call</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+  <link rel="stylesheet" href="css/screen.css" />
+</head>
+<body>
+<main id="interface">
+  <header id="header">
+    <h1>Welcome</h1>
+    <button class="join" type="button" id="call-button">Join Call</button>
+  </header>
+  <article id="videos">
+    <h2 class="preserve-access">Streaming Videos</h2>
+    <video id="self"
+      autoplay
+      muted
+      playsinline
+      poster="img/placeholder.png">
+    </video>
+    <video id="peer"
+      autoplay
+      playsinline
+      poster="img/placeholder.png">
+    </video>
+  </article>
+</main>
+<script src="/socket.io/socket.io.js"></script>
+<script
+  src="https://webrtchacks.github.io/adapter/adapter-latest.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
