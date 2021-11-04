@@ -22,16 +22,26 @@ const namespaces = io.of(/^\/[a-z]{3}\-[a-z]{4}\-[a-z]{3}$/)
 
 namespaces.on('connection', function(socket) {
   const namespace = socket.nsp;
+  const peers = [];
 
-  socket.broadcast.emit('connected peer');
+  for (let peer of namespace.sockets.keys()) {
+    peers.push(peer);
+  }
+
+  // Send everyone on call to connecting peer
+  socket.emit('connected peers', peers);
+
+  // Send connecting peer's ID to everyone on the call
+  socket.broadcast.emit('connected peer', socket.id);
 
   // listen for signals
-  socket.on('signal', function(signal) {
-    socket.broadcast.emit('signal', signal);
+  socket.on('signal', function({ to, from, signal }) {
+    socket.to(to).emit('signal', { to, from, signal });
   })
+
   // listen for disconnects
   socket.on('disconnect', function() {
-    namespace.emit('disconnected peer');
+    namespace.emit('disconnected peer', socket.id);
   })
 
 });

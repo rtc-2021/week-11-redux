@@ -6,16 +6,10 @@
 
 const $self = {
   rtcConfig: null,
-  isPolite: false,
-  isMakingOffer: false,
-  isIgnoringOffer: false,
-  isSettingRemoteAnswerPending: false,
   mediaConstraints: { audio: false, video: true }
 };
 
-const $peer = {
-  connection: new RTCPeerConnection($self.rtcConfig)
-};
+const $peers = {};
 
 
 
@@ -83,7 +77,6 @@ function joinCall() {
 }
 
 function leaveCall() {
-  self.isPolite = false;
   sc.close();
   resetCall($peer);
 }
@@ -201,22 +194,27 @@ function handleRtcConnectionStateChange() {
 function registerScCallbacks() {
   sc.on('connect', handleScConnect);
   sc.on('connected peer', handleScConnectedPeer);
+  sc.on('connected peers', handleScConnectedPeers);
   sc.on('disconnected peer', handleScDisconnectedPeer);
   sc.on('signal', handleScSignal);
 }
 
 function handleScConnect() {
   console.log('Successfully connected to the signaling server!');
-  establishCallFeatures($peer);
+  $self.id = sc.id;
+  console.log('Self ID:', $self.id);
 }
 
-function handleScConnectedPeer() {
-  $self.isPolite = true;
+function handleScConnectedPeers(ids) {
+  console.log('Connected peer IDs:', ids.join(', '));
 }
 
-function handleScDisconnectedPeer() {
-  resetCall($peer);
-  establishCallFeatures($peer);
+function handleScConnectedPeer(id) {
+  console.log('Connected peer ID:', id);
+}
+
+function handleScDisconnectedPeer(id) {
+  console.log('Disconnected peer ID:', id);
 }
 
 function resetAndRetryConnection(peer) {
